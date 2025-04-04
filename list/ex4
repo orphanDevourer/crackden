@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+
+        int balance = 0;
+        int amount;
+        int option;
+
+        do {
+
+            System.out.println("1) - View Balance\n2) - Deposit\n3) - Withdraw\n0) - Exit");
+            option = sc.nextInt();
+
+            if (option == 1) {
+                System.out.printf("Your current balance is: %d", balance);
+            } else if (option == 2) {
+                System.out.printf("Your current balance is: %d\nhow much would you like to deposit? ", balance);
+                amount = sc.nextInt();
+                balance += amount;
+            } else if (option == 3) {
+
+                if (balance > 0) {
+                    System.out.printf("Your current balance is: %d\nhow much would you like to withdraw? ", balance);
+                    amount = sc.nextInt();
+                    if (balance - amount >= 0) {
+                        balance -= amount;
+                    } else {
+                        System.out.print("you got no CASH");
+                    }
+                } else {
+                    System.out.printf("YOURE BROKE AS HELL!!! (%d)", balance);
+                }
+            }
+
+            sc.nextLine();
+            System.out.println("");
+        } while (option != 0);
+    }
+
+}

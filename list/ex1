@@ -1,0 +1,111 @@
+import java.util.Scanner;
+
+public class MainJokenpo{
+
+    public static void main(String[] args){
+
+        Scanner sc = new Scanner(System.in);
+        
+        int n = 0;
+
+        while(n % 2 == 0){
+            System.out.println("number of rounds(odd number): ");
+            n = sc.nextInt();
+        }
+
+        int userW = 0;
+        int compW = 0;
+        int ties = 0;
+        int[][] choices = new int[2][3];
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                choices[i][j] = 0;
+            }
+        }
+        
+         System.out.println("the value of N is: "+ n);
+
+        for(int i = 0;i < n;i++){
+            System.out.println("1- Rock, 2- Paper, 3- Scissors");
+            int userC = sc.nextInt();
+            String userCString = getCastChoice(userC);
+
+            int compC = (int)(Math.random()* 3) + 1;
+            String compCstring = getCastChoice(compC);
+
+            System.out.println("[YOU] chose " + userCString + " , the computer chose " + compCstring);
+
+            
+            if(compC == 1 && userC == 3){
+                System.out.println("the [COMPUTER] won this round");
+                compW++;
+            }
+            else if(compC == 2 && userC == 1){
+                System.out.println("the [COMPUTER] won this round");
+                compW++;
+            }
+            else if(compC == 3 && userC == 2){
+                System.out.println("the [COMPUTER] won this round");
+                compW++;
+            }
+            else if(compC == userC){
+                System.out.println("its a [TIE]");
+                ties++;
+            }
+            else{
+                System.out.println("the [USER] won this round");
+                userW++;
+            }
+
+
+            if(userC == 1){
+                choices[0][0] += 1;
+            }
+            if(userC == 2){
+                choices[0][1] += 1;
+            }
+            if(userC == 3){
+                choices[0][2] += 1;
+            }
+
+            if(compC == 1){
+                choices[1][0] += 1;
+            }
+            if(compC == 2){
+                choices[1][1] += 1;
+            }
+            if(compC == 3){
+                choices[1][2] += 1;
+            }
+        }
+
+        if(compW > userW){
+            System.out.println("the [COMPUTER] won");
+        }
+        else if(compW < userW){
+            System.out.println("the [USER] won");
+        }
+        else{
+            System.out.println("[TIE]");
+        }
+
+        System.out.printf("Player %d x %d Computer | %d Ties \n\n", userW, compW, ties);
+        System.out.printf("Player: %d Rock, %d Paper, %d Scissors\n", choices[0][0], choices[0][1], choices[0][2]);
+        System.out.printf("Computer: %d Rock, %d Paper, %d Scissors\n",  choices[1][0], choices[1][1], choices[1][2]);
+
+        sc.close();
+    }
+    
+    public static String getCastChoice(int choice){
+        switch(choice){
+            case 1:
+                return "Rock";
+            case 2:
+                return "Paper";
+            case 3:
+                return "Scissors";
+            default:
+                return "[INVALID]";
+            }
+        }
+}

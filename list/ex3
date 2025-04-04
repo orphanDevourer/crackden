@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+public class Main
+{
+	public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        float[] grade = new float [4];
+
+        for(int i = 0; i < 4; i++){
+            grade[i] = -1;
+        }
+
+        for(int i = 0; i < 4; i++){
+            
+            while(grade[i] < 0 || grade[i] > 10){
+                System.out.printf("Type in your grade [%d]", i);
+                grade[i] = sc.nextFloat();
+            }
+            
+            if(grade[i] < 6){
+                System.out.println("you got a D\n [FAIL]");
+            }
+            else if(grade[i] < 7.5){
+                System.out.println("you got a C\n [APPROVED]");
+            }
+            else if(grade[i] < 9){
+                System.out.println("you got a B\n [APPROVED]");
+            }
+            else{
+                System.out.println("you got an A\n [LETS HAVE A BABY]");
+            }
+                
+            
+        }
+    }
+	
+
+}

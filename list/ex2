@@ -1,0 +1,59 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class Main
+{
+	public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        Random rand = new Random();
+
+        int[] neo = new int [30];
+
+        int op = 0;
+        int aux = 0;
+
+		for(int i = 0; i < 30; i++){
+		    neo[i] = rand.nextInt(300);
+		    System.out.printf("%d ", neo[i]);
+		}
+
+		System.out.println("\nDOES THIS SHIT GO UP OR DOWN MAN? \n 1) - THIS BITCH GOES STRAIGHT UP\n 2) - IT GOES DOWN YO");
+
+		while(op != 1 && op != 2){
+		    op = sc.nextInt();
+		    sc.nextLine();
+		}
+
+        if(op == 1){
+            for(int i = 0; i < 30; i++){
+    	       for(int j = i + 1; j < 30; j++){
+        		  if(neo[i] < neo[j]){
+        		      aux = neo[i];
+        		      neo[i] = neo[j];
+        		      neo[j] = aux;
+        		  }
+        	   }
+            }
+        }
+        
+        else{
+        	for(int i = 0; i < 30; i++){
+        	    for(int j = i + 1; j < 30; j++){
+        		   if(neo[i] > neo[j]){
+        		      aux = neo[i];
+        		      neo[i] = neo[j];
+        		      neo[j] = aux;
+        		  }
+        		}
+        	}
+        		    
+        }
+
+        for(int i = 0; i < 30; i++){
+            System.out.printf("%d ", neo[i]);
+        }
+    }
+	
+}
