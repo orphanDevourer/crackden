@@ -1,0 +1,123 @@
+import java.util.Scanner;
+
+class Car {
+    String plate;
+    String model;
+    int year;
+    double speed;
+    double fuel;
+    double cap;
+
+    Car(String plate, String model, int year, double fuel, double cap) {
+        this.plate = plate;
+        this.model = model;
+        this.year = year;
+        this.speed = 0;
+        this.fuel = fuel;
+        this.cap = cap;
+    }
+
+    void inc(double val) {
+        if (fuel > 0) {
+            double inc = speed * 0.10;
+            if (speed + inc > 150) {
+                System.out.println("max SPEED REACHED you fucker");
+                speed = 150;
+            } else {
+                speed += inc;
+            }
+
+            double consmp = val * 0.01;
+            fuel -= consmp;
+            if (fuel < 0)
+                fuel = 0;
+        } else {
+            System.out.println("not enough fuel to accelerate");
+        }
+    }
+
+    void brake(double val) {
+        if (speed > 0) {
+            double reduc = speed * 0.10;
+            speed -= reduc;
+
+            if (speed < 0)
+                speed = 0;
+        } else {
+            System.out.println("the car is alredy at a stop");
+        }
+    }
+
+    void refuel(double val) {
+        if (fuel + val > cap) {
+            fuel = cap;
+            System.out.println("greedy bastard");
+        } else {
+            fuel += val;
+        }
+    }
+
+    public String toString() {
+        return "\nvehicle:\nplate: " + plate + "\nmodel: " + model + "\nyear: " + year +
+                "\nspeed: " + speed + "\nfuel: " + fuel +
+                "\ntankfuel cap: " + cap;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Plate number: ");
+        String plate = sc.nextLine();
+
+        System.out.print("vehicle number: ");
+        String model = sc.nextLine();
+
+        System.out.print("vehicle's year nd shi: ");
+        int year = sc.nextInt();
+
+        System.out.print("whats the fuel at rn: ");
+        double fuel = sc.nextDouble();
+
+        System.out.print("whats its max fuel cap: ");
+        double cap = sc.nextDouble();
+
+        Car myCar = new Car(plate, model, year, fuel, cap);
+
+        int OP;
+        do {
+            System.out.println("\n1 - Accelerate\n2 - brake\n3 - refuel\n4 - Stats\n0 - BTFO");
+            System.out.print("options: ");
+            OP = sc.nextInt();
+
+            switch (OP) {
+                case 1:
+                    System.out.print("Accelerate: ");
+                    double valAcelerar = sc.nextDouble();
+                    myCar.inc(valAcelerar);
+                    break;
+                case 2:
+                    System.out.print("Brake: ");
+                    double valbrake = sc.nextDouble();
+                    myCar.brake(valbrake);
+                    break;
+                case 3:
+                    System.out.print("refuel: ");
+                    double fuelVal = sc.nextDouble();
+                    myCar.refuel(fuelVal);
+                    break;
+                case 4:
+                    System.out.println(myCar.toString());
+                    break;
+                case 0:
+                    System.out.println("beating the fuck off ;((");
+                    break;
+                default:
+                    System.out.println("[INVALID INPUT]");
+            }
+        } while (OP != 0);
+
+        sc.close();
+    }
+}
